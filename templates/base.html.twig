@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block meta_description %}Theatro INSAT, the official theatre club of INSAT.{% endblock %}">
+        <title>{% block title %}Theatro INSAT{% endblock %}</title>
+        <link rel="icon" href="{{ asset('legacy/assets/theatro-logo.png') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Marcellus&family=Montserrat:wght@300;400;500&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap">
+        <link rel="stylesheet" href="{{ asset('legacy/css/site.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+        <script src="{{ asset('legacy/js/home.js') }}" defer></script>
+        <script src="{{ asset('legacy/js/booking.js') }}" defer></script>
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        {{ include('partials/_navbar.html.twig') }}
+        {{ include('partials/_flash.html.twig') }}
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        {{ include('partials/_footer.html.twig') }}
+    </body>
+</html>

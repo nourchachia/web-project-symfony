@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Apply to Join - Theatro INSAT{% endblock %}
+
+{% block meta_description %}
+    Apply to join Theatro INSAT. Your application will be reviewed before account creation.
+{% endblock %}
+
+{% block body_class %}page-auth page-registration{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('legacy/css/auth.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="star-container"></div>
+
+    <section class="auth-page">
+        <div class="auth-container auth-container--wide">
+            <div class="auth-header">
+                <span class="auth-brand">Theatro</span>
+                <span class="auth-subtitle">Apply to Join Us</span>
+                <p class="auth-description">
+                    Fill in the form below. Your application will be reviewed by our team before an account is created.
+                </p>
+            </div>
+
+            {{ form_start(form, {
+                attr: {
+                    class: 'auth-form',
+                    novalidate: 'novalidate'
+                }
+            }) }}
+                {{ form_errors(form) }}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.firstname) }}
+                        {{ form_widget(form.firstname) }}
+                        {{ form_errors(form.firstname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.lastname) }}
+                        {{ form_widget(form.lastname) }}
+                        {{ form_errors(form.lastname) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.phone) }}
+                        {{ form_widget(form.phone) }}
+                        {{ form_errors(form.phone) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.birthdate) }}
+                        {{ form_widget(form.birthdate) }}
+                        {{ form_errors(form.birthdate) }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.yearOfStudy) }}
+                        {{ form_widget(form.yearOfStudy) }}
+                        {{ form_errors(form.yearOfStudy) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.fieldOfStudy) }}
+                        {{ form_widget(form.fieldOfStudy) }}
+                        {{ form_errors(form.fieldOfStudy) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.department) }}
+                    {{ form_widget(form.department) }}
+                    {{ form_errors(form.department) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.picture) }}
+                    {{ form_widget(form.picture) }}
+                    {{ form_help(form.picture) }}
+                    {{ form_errors(form.picture) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.whyJoin) }}
+                    {{ form_widget(form.whyJoin) }}
+                    {{ form_errors(form.whyJoin) }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.plainPassword.first) }}
+                        {{ form_widget(form.plainPassword.first) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.plainPassword.second) }}
+                        {{ form_widget(form.plainPassword.second) }}
+                        {{ form_errors(form.plainPassword.second) }}
+                    </div>
+                </div>
+
+                {{ form_errors(form.plainPassword) }}
+
+                <button type="submit" class="auth-btn">Submit Application</button>
+            {{ form_end(form) }}
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="{{ path('app_login') }}">Log in</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
