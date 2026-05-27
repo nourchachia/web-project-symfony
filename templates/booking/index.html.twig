@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book a Show - Theatro INSAT{% endblock %}
+
+{% block meta_description %}
+    Book your seat for a Theatro INSAT show.
+{% endblock %}
+
+{% block body_class %}page-booking{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('legacy/css/booking.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="booking-stage">
+        <div class="booking-stage__header">
+            <span class="booking-stage__eyebrow">Theatro INSAT</span>
+            <h1>Book a Show</h1>
+        </div>
+
+        <div class="theater-container">
+            <div class="scene">Scene</div>
+
+            <div class="seating-layout" aria-label="Theater seating plan">
+                <div class="section">
+                    <div class="seats-grid">
+                        <div class="row-labels left-labels" id="left-labels-left"></div>
+                        <div>
+                            <div class="rows-container" id="left-section"></div>
+                            <div class="numbers-wrapper">
+                                <div class="seat-numbers" id="left-numbers"></div>
+                            </div>
+                        </div>
+                        <div class="row-labels right-labels" id="left-labels-right"></div>
+                    </div>
+                    <div class="section-label">Entree gauche</div>
+                </div>
+
+                <div class="section">
+                    <div class="seats-grid">
+                        <div class="row-labels left-labels" id="center-labels-left"></div>
+                        <div>
+                            <div class="rows-container" id="center-section"></div>
+                            <div class="numbers-wrapper">
+                                <div class="seat-numbers" id="center-numbers"></div>
+                            </div>
+                        </div>
+                        <div class="row-labels right-labels" id="center-labels-right"></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="seats-grid">
+                        <div class="row-labels left-labels" id="right-labels-left"></div>
+                        <div>
+                            <div class="rows-container" id="right-section"></div>
+                            <div class="numbers-wrapper">
+                                <div class="seat-numbers" id="right-numbers"></div>
+                            </div>
+                        </div>
+                        <div class="row-labels right-labels" id="right-labels-right"></div>
+                    </div>
+                    <div class="section-label">Entree droite</div>
+                </div>
+            </div>
+
+            <div class="booking-summary" aria-live="polite">
+                <span class="booking-summary__label">Selected Seats</span>
+                <span class="booking-summary__value" id="booking-selected-seats">None</span>
+            </div>
+        </div>
+    </section>
+{% endblock %}
