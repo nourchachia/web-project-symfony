@@ -1,0 +1,258 @@
+.page-booking {
+    background: #0a0a0a;
+    color: #fff;
+}
+
+.booking-stage {
+    min-height: calc(100vh - 160px);
+    padding: 120px 24px 72px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(201, 169, 97, 0.18), transparent 32%),
+        linear-gradient(135deg, #111 0%, #1b1b1b 48%, #090909 100%);
+}
+
+.booking-stage__header {
+    max-width: 1400px;
+    margin: 0 auto 28px;
+}
+
+.booking-stage__eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.booking-stage h1 {
+    margin: 0;
+    color: #fff;
+    font-family: "Cinzel Decorative", Georgia, serif;
+    font-size: 58px;
+    line-height: 1;
+}
+
+.theater-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 40px 34px;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(to bottom, #0a0a0a 0%, #171717 52%, #242424 100%);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+.scene {
+    width: fit-content;
+    margin: 0 auto 60px;
+    padding: 18px 80px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #c9a961 0%, #e8d4a0 50%, #c9a961 100%);
+    color: #1a1a1a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 8px 30px rgba(201, 169, 97, 0.32);
+    animation: booking-spotlight 3s ease-in-out infinite;
+}
+
+.seating-layout {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    min-width: 1120px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-label {
+    margin-top: 25px;
+    color: #c9a961;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.seats-grid {
+    display: flex;
+    gap: 12px;
+}
+
+.row-labels,
+.rows-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5px;
+}
+
+.row-labels {
+    justify-content: flex-start;
+}
+
+.row-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 19px;
+    color: #c9a961;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5px;
+    height: 19px;
+}
+
+.seat {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 1.5px solid #8b0000;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to bottom, #c41e3a 0%, #8b0000 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.seat::before {
+    position: absolute;
+    bottom: -2.5px;
+    left: 50%;
+    width: 55%;
+    height: 2.5px;
+    border-radius: 0 0 1.5px 1.5px;
+    background: linear-gradient(to bottom, #6b0000 0%, #4a0000 100%);
+    content: "";
+    transform: translateX(-50%);
+}
+
+.seat:hover {
+    border-color: #c9a961;
+    background: linear-gradient(to bottom, #e8d4a0 0%, #c9a961 100%);
+    box-shadow: 0 4px 8px rgba(201, 169, 97, 0.44);
+    transform: scale(1.1);
+}
+
+.seat.selected {
+    border-color: #c9a961;
+    background: linear-gradient(to bottom, #c9a961 0%, #a0854d 100%);
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.52);
+}
+
+.seat.occupied {
+    border-color: #3a3a3a;
+    background: linear-gradient(to bottom, #4a4a4a 0%, #2a2a2a 100%);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.seat.occupied:hover {
+    transform: none;
+}
+
+.seat-numbers {
+    display: flex;
+    gap: 2.5px;
+    margin-top: 8px;
+}
+
+.seat-number {
+    width: 16px;
+    flex-shrink: 0;
+    color: #c9a961;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9px;
+    text-align: center;
+}
+
+.left-labels {
+    margin-right: 12px;
+}
+
+.right-labels {
+    margin-left: 12px;
+}
+
+.numbers-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.booking-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    max-width: 760px;
+    margin: 36px auto 0;
+    padding: 18px 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13px;
+}
+
+.booking-summary__label {
+    color: rgba(255, 255, 255, 0.42);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.booking-summary__value {
+    color: #fff;
+    text-align: right;
+}
+
+@keyframes booking-spotlight {
+    0%,
+    100% {
+        opacity: 0.86;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 760px) {
+    .booking-stage {
+        padding: 96px 14px 54px;
+    }
+
+    .booking-stage h1 {
+        font-size: 42px;
+    }
+
+    .theater-container {
+        padding: 34px 20px 28px;
+    }
+
+    .scene {
+        margin-bottom: 42px;
+        padding: 14px 54px;
+    }
+
+    .booking-summary {
+        flex-direction: column;
+    }
+
+    .booking-summary__value {
+        text-align: left;
+    }
+}
