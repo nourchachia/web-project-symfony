@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Form Submission</title>
+    </head>
+    <body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,Helvetica,sans-serif;">
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#0a0a0a;padding:48px 20px;">
+            <tr>
+                <td align="center">
+                    <table width="560" cellpadding="0" cellspacing="0" role="presentation" style="max-width:560px;background:#111;border:1px solid rgba(255,255,255,0.14);padding:40px;color:#fff;">
+                        <tr>
+                            <td style="padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                                <p style="margin:0;font-size:32px;font-weight:700;letter-spacing:2px;color:#fff;">Theatro</p>
+                                <p style="margin:6px 0 0;font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.45);text-transform:uppercase;">Contact Form Submission</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:26px 0 8px;">
+                                <p style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-transform:uppercase;margin:0 0 8px;">From</p>
+                                <p style="font-size:16px;color:#fff;margin:0;font-weight:700;">{{ fullname }}</p>
+                                <p style="font-size:14px;color:rgba(255,255,255,0.68);margin:5px 0 0;">{{ visitorEmail }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:20px 0 28px;">
+                                <p style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-transform:uppercase;margin:0 0 12px;">Message</p>
+                                <div style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.86);margin:0;padding:18px;background:rgba(255,255,255,0.05);border-left:2px solid rgba(255,255,255,0.24);">
+                                    {{ message|nl2br }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:22px;border-top:1px solid rgba(255,255,255,0.1);">
+                                <p style="font-size:11px;color:rgba(255,255,255,0.35);margin:0;line-height:1.6;">
+                                    Sent via Theatro INSAT website on {{ sentAt|date('Y-m-d H:i:s T') }}.<br>
+                                    Reply directly to this email to respond to {{ fullname }}.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
