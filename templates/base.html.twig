@@ -19,7 +19,9 @@
         <script src="{{ asset('legacy/js/booking.js') }}" defer></script>
     </head>
     <body class="{% block body_class %}{% endblock %}">
-        {{ include('partials/_navbar.html.twig') }}
+        {% block navbar %}
+           {{ include('partials/_navbar.html.twig') }}
+        {% endblock %}
         {{ include('partials/_flash.html.twig') }}
 
         <main>

@@ -1,27 +1,32 @@
-<nav class="site-navbar">
-    <a href="{{ path('app_home_index') }}" class="site-navbar__logo" aria-label="Theatro INSAT home">
-        <img src="{{ asset('legacy/assets/theatro-logo.png') }}" alt="Theatro INSAT logo">
-    </a>
+<nav class="navbar">
+    <div class="logo">
+        <img src="{{ asset('legacy/assets/592223353_1450031396707025_4416535021509855370_n.png') }}" alt="Theatro Logo">
+    </div>
+    <ul class="nav-links">
+<li><a href="{{ path('app_home_index') }}#home">Home</a></li>
+<li><a href="{{ path('app_home_index') }}#about">About</a></li>
+<li><a href="{{ path('app_home_index') }}#shows">Shows</a></li>
 
-    <ul class="site-navbar__links">
-        <li><a href="{{ path('app_home_index') }}">Home</a></li>
-        <li><a href="{{ app.request.attributes.get('_route') == 'app_home_index' ? '#about' : path('app_home_index') ~ '#about' }}">About</a></li>
-        <li><a href="{{ app.request.attributes.get('_route') == 'app_home_index' ? '#shows' : path('app_home_index') ~ '#shows' }}">Shows</a></li>
-        <li><a href="{{ path('app_booking_index') }}">Booking</a></li>
-        {% if is_granted('ROLE_USER') %}
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('app_approvals') }}">Approvals</a></li>
+        {% endif %}
+
+        {% if app.user %}
             <li><a href="{{ path('app_workshop_index') }}">Workshops</a></li>
         {% endif %}
+
         {% if not app.user %}
-            <li><a href="{{ path('app_registration_new') }}">Join Us</a></li>
+            <li class="nav-join-link"><a href="{{ path('app_registration_new') }}">Join Us</a></li>
         {% endif %}
+
         <li><a href="{{ path('app_contact_index') }}">Contact</a></li>
     </ul>
 
-    <div class="site-navbar__auth">
+    <div class="nav-auth-wrapper">
         {% if app.user %}
-            <a href="{{ path('app_logout') }}" class="site-navbar__button">Logout</a>
+            <a href="{{ path('app_logout') }}" class="nav-login-btn">Logout</a>
         {% else %}
-            <a href="{{ path('app_login') }}" class="site-navbar__button">Login</a>
+            <a href="{{ path('app_login') }}" class="nav-login-btn">Login</a>
         {% endif %}
     </div>
 </nav>
