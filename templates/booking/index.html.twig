@@ -9,7 +9,13 @@
 {% block body_class %}page-booking{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('legacy/css/booking.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('legacy/js/booking.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -65,10 +71,23 @@
                 </div>
             </div>
 
-            <div class="booking-summary" aria-live="polite">
+            <div class="booking-summary glass-panel" aria-live="polite">
                 <span class="booking-summary__label">Selected Seats</span>
                 <span class="booking-summary__value" id="booking-selected-seats">None</span>
             </div>
+
+            <div class="booking-actions glass-panel">
+                <button type="button" class="booking-btn booking-btn--primary" id="confirm-booking-btn">
+                    Confirm Booking
+                </button>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <button type="button" class="booking-btn booking-btn--secondary" id="release-booking-btn">
+                        Release selected seats
+                    </button>
+                {% endif %}
+            </div>
+
+            <p class="booking-feedback" id="booking-feedback" role="status" aria-live="polite"></p>
         </div>
     </section>
 {% endblock %}
