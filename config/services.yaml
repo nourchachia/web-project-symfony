@@ -34,3 +34,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\Mailer:
+        arguments:
+            $smtpHost:     '%env(SMTP_HOST2)%'
+            $smtpPort:     '%env(int:SMTP_PORT2)%'
+            $smtpUser:     '%env(SMTP_USER2)%'
+            $smtpPass:     '%env(SMTP_PASS2)%'
+            $smtpFrom:     '%env(SMTP_FROM2)%'
+            $smtpFromName: '%env(SMTP_FROM_NAME2)%'
