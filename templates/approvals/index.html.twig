@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending Requests — Theatro INSAT{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('legacy/css/approvals.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="stars-bg"></div>
+
+    <h1 id="main-title">PENDING REQUESTS</h1>
+
+    <div id="pending-badge" style="text-align:center; margin-bottom: -20px;">
+        <span style="
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(192,192,192,0.5);
+            border: 1px solid rgba(192,192,192,0.15);
+            padding: 6px 18px;
+            border-radius: 20px;
+        ">
+            {{ rows|length }} request{{ rows|length != 1 ? 's' : '' }} pending
+        </span>
+    </div>
+
+    <div class="card-container">
+
+        {% if rows is empty %}
+
+            <div class="card empty-card">
+                <div class="card-content" style="text-align:center; padding: 20px 0;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(192,192,192,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        style="display:block; margin: 0 auto 20px;">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="9" y1="13" x2="15" y2="13"/>
+                    </svg>
+                    <span class="label" style="display:block; margin-bottom: 10px; font-size: 11px; letter-spacing: 2px;">No requests</span>
+                    <span class="value" style="font-size: 17px; color: rgba(200,200,200,0.6);">No pending registrations</span>
+                </div>
+            </div>
+
+        {% else %}
+
+            {% for row in rows %}
+                <div class="card" data-id="{{ row.id }}">
+
+                    <div class="card-header" style="
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding-bottom: 16px;
+                        margin-bottom: 14px;
+                        border-bottom: 1px solid rgba(192,192,192,0.1);
+                    ">
+                        {% if row.picture %}
+                            <img src="{{ row.picture }}" alt="avatar" style="
+                                width: 42px; height: 42px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                                border: 1px solid rgba(192,192,192,0.2);
+                                flex-shrink: 0;
+                            ">
+                        {% else %}
+                            <div style="
+                                width: 42px; height: 42px;
+                                border-radius: 50%;
+                                background: rgba(192,192,192,0.08);
+                                border: 1px solid rgba(192,192,192,0.2);
+                                display: flex; align-items: center; justify-content: center;
+                                font-family: 'Cinzel', serif;
+                                font-size: 14px;
+                                color: rgba(220,220,220,0.8);
+                                flex-shrink: 0;
+                            ">
+                                {{ row.firstname|first|upper }}{{ row.lastname|first|upper }}
+                            </div>
+                        {% endif %}
+
+                        <div>
+                            <div style="font-family:'Cinzel',serif; font-size:14px; color:rgba(230,230,230,0.95); letter-spacing:0.5px;">
+                                {{ row.firstname }} {{ row.lastname }}
+                            </div>
+                            <div style="font-family:'Montserrat',sans-serif; font-size:11px; color:rgba(192,192,192,0.5); margin-top:2px;">
+                                {{ row.email }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        {% if row.department %}
+                            <div class="card-row">
+                                <span class="label">department</span>
+                                <span class="value">{{ row.department }}</span>
+                            </div>
+                        {% endif %}
+                        {% if row.fieldOfStudy %}
+                            <div class="card-row">
+                                <span class="label">field of study</span>
+                                <span class="value">{{ row.fieldOfStudy }}</span>
+                            </div>
+                        {% endif %}
+                        {% if row.yearOfStudy %}
+                            <div class="card-row">
+                                <span class="label">year of study</span>
+                                <span class="value">{{ row.yearOfStudy }}</span>
+                            </div>
+                        {% endif %}
+                        {% if row.phone %}
+                            <div class="card-row">
+                                <span class="label">phone</span>
+                                <span class="value">{{ row.phone }}</span>
+                            </div>
+                        {% endif %}
+                        {% if row.whyJoin %}
+                            <div class="card-row">
+                                <span class="label">why join</span>
+                                <span class="value">{{ row.whyJoin }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn accept">Accept</button>
+                        <button class="btn decline">Decline</button>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('legacy/js/approval.js') }}"></script>
+{% endblock %}
