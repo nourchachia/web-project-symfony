@@ -1,4 +1,4 @@
-﻿{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}THEATRO - The Official Theatre Club of INSAT{% endblock %}
 
@@ -45,7 +45,9 @@
         <div class="book-content">
             <h2 class="book-title">Witness the <span class="italic-text">Magic</span></h2>
             <p class="book-tagline">Reserve your place in history. Every seat tells a story.</p>
-            <a href="#shows" class="btn btn-primary">Book Show</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_booking_index', {show_name: '3am-ba3d-80'}) }}" class="btn btn-primary">Book Show</a>
+            {% endif %}
         </div>
     </section>
 

@@ -165,5 +165,4 @@ document.addEventListener("DOMContentLoaded", () => {
             swalError("Server error");
         }
     });
-
 });

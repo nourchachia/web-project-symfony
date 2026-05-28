@@ -10,7 +10,7 @@ doctrine:
         mapping_types:
             _text: string
             registrationstatus: string
-        schema_filter: '~^(users|PendingRegistration|password_resets|doctrine_migration_versions)$~'
+        schema_filter: '~^(users|PendingRegistration|password_resets|doctrine_migration_versions|shows|seats|tickets)$~'
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
