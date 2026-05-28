@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}{% endblock %}
+
+{% block body %}
+<div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:#0a0a0a; color:white;">
+    <p style="letter-spacing:4px; font-size:11px; opacity:0.4; text-transform:uppercase; margin-bottom:16px;">Restricted Area</p>
+    <h1 style="font-family:'Cinzel Decorative',serif; letter-spacing:6px; font-size:32px; margin-bottom:16px;">ADMINS ONLY</h1>
+    <p style="opacity:0.4; margin-bottom:40px;">You do not have permission to view this page.</p>
+    <a href="{{ path('app_home_index') }}" style="border:1px solid rgba(255,255,255,0.35); padding:14px 36px; color:white; text-decoration:none; letter-spacing:3px; font-size:11px; text-transform:uppercase;">← Back to Home</a>
+</div>
+{% endblock %}
