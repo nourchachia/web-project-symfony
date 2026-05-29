@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Workshops - Theatro INSAT{% endblock %}
+
+{% block meta_description %}
+    Create, edit, and remove workshops visible to Theatro INSAT members.
+{% endblock %}
+
+{% block body_class %}page-change-workshop{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('legacy/css/change_workshop.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('legacy/js/change_workshop.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <section
+        class="admin-section"
+        data-workshops-url="{{ path('api_workshops_list') }}"
+        data-upload-url="{{ path('api_upload_video') }}"
+    >
+        <div class="admin-header">
+            <h5 class="section-title">Admin Panel</h5>
+            <h2 class="section-subtitle">Manage Workshops</h2>
+            <p class="section-description">Create, edit, or remove workshops visible to all members.</p>
+        </div>
+
+        <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+        <div class="admin-card" id="add-workshop-card">
+            <h3 class="card-title">
+                <span class="card-icon" aria-hidden="true">+</span>
+                Add New Workshop
+            </h3>
+
+            <form id="add-form" class="admin-form" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new-title">Title</label>
+                        <input type="text" id="new-title" placeholder="e.g. Acting Workshop" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-date">Date</label>
+                        <input type="date" id="new-date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-departement">Department</label>
+                    <select id="new-departement" required>
+                        <option value="" disabled selected>Select a department...</option>
+                        <option value="ACTING">Acting</option>
+                        <option value="DANCING">Dancing</option>
+                        <option value="MUSIC">Music</option>
+                        <option value="WRITING">Writing</option>
+                        <option value="MEDIA">Media</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-description">Description</label>
+                    <textarea id="new-description" rows="4" placeholder="Describe what participants will learn..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-video">Workshop Video <span class="label-optional">(optional)</span></label>
+                    <input type="file" id="new-video" accept="video/mp4,video/mpeg,video/ogg,video/quicktime,video/webm,video/x-m4v">
+                    <p class="upload-hint">Accepted formats: MP4, MPEG, OGG, MOV, WEBM, M4V. Max 100 MB.</p>
+                    <div id="new-video-progress" class="upload-progress hidden">
+                        <span class="upload-progress-bar"></span>
+                        <span class="upload-progress-text">Uploading...</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-admin btn-add" id="add-btn">
+                    <span class="btn-text">Create Workshop</span>
+                    <span class="btn-spinner hidden" aria-hidden="true"></span>
+                </button>
+            </form>
+        </div>
+
+        <div class="admin-card" id="workshops-list-card">
+            <div class="card-header-row">
+                <h3 class="card-title">
+                    <span class="card-icon" aria-hidden="true">#</span>
+                    Existing Workshops
+                </h3>
+                <span class="workshops-count" id="workshops-count"></span>
+            </div>
+
+            <div id="workshops-loading" class="state-message">Loading workshops...</div>
+            <div id="workshops-error" class="state-message error hidden"></div>
+            <div id="workshops-list"></div>
+        </div>
+    </section>
+
+    <div id="edit-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+            <button class="modal-close" id="modal-close-btn" type="button" aria-label="Close">&times;</button>
+            <h3 class="modal-title" id="modal-title">Edit Workshop</h3>
+
+            <form id="edit-form" class="admin-form" novalidate>
+                <input type="hidden" id="edit-id">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-title">Title</label>
+                        <input type="text" id="edit-title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-date">Date</label>
+                        <input type="date" id="edit-date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-departement">Department</label>
+                    <select id="edit-departement" required>
+                        <option value="ACTING">Acting</option>
+                        <option value="DANCING">Dancing</option>
+                        <option value="MUSIC">Music</option>
+                        <option value="WRITING">Writing</option>
+                        <option value="MEDIA">Media</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-description">Description</label>
+                    <textarea id="edit-description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-video">Workshop Video <span class="label-optional">(optional)</span></label>
+                    <div id="edit-current-video" class="current-video-wrap hidden">
+                        <video id="edit-video-preview" controls class="video-preview-sm"></video>
+                        <button type="button" class="btn-remove-video" id="edit-remove-video-btn">Remove video</button>
+                    </div>
+                    <input type="file" id="edit-video" accept="video/mp4,video/mpeg,video/ogg,video/quicktime,video/webm,video/x-m4v">
+                    <p class="upload-hint">Leave empty to keep the current video.</p>
+                    <div id="edit-video-progress" class="upload-progress hidden">
+                        <span class="upload-progress-bar"></span>
+                        <span class="upload-progress-text">Uploading...</span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-admin btn-cancel" id="modal-cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-admin btn-save" id="edit-save-btn">
+                        <span class="btn-text">Save Changes</span>
+                        <span class="btn-spinner hidden" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+        <div class="modal-box modal-box--sm">
+            <h3 class="modal-title" id="delete-modal-title">Delete Workshop?</h3>
+            <p class="modal-body" id="delete-confirm-text"></p>
+            <div class="modal-actions">
+                <button class="btn-admin btn-cancel" id="delete-cancel-btn" type="button">Cancel</button>
+                <button class="btn-admin btn-delete" id="delete-confirm-btn" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

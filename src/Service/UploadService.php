@@ -28,10 +28,26 @@ final class UploadService
         $extension = $file->guessExtension() ?: 'bin';
         $filename = $safeName . '-' . bin2hex(random_bytes(8)) . '.' . $extension;
         $storagePath = 'pending/' . date('Y/m') . '/' . $filename;
+        return $this->uploadToSupabase($file, $storagePath, 'picture');
+    }
+
+    public function saveWorkshopVideo(UploadedFile $file): string
+    {
+        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeName = $this->slugger->slug($originalName)->lower()->toString();
+        $extension = $file->guessExtension() ?: $file->getClientOriginalExtension() ?: 'bin';
+        $filename = $safeName . '-' . bin2hex(random_bytes(8)) . '.' . $extension;
+        $storagePath = 'workshops/videos/' . date('Y/m') . '/' . $filename;
+
+        return $this->uploadToSupabase($file, $storagePath, 'video');
+    }
+
+    private function uploadToSupabase(UploadedFile $file, string $storagePath, string $label): string
+    {
         $localPath = $file->getRealPath();
 
         if ($localPath === false) {
-            throw new RuntimeException('The uploaded picture could not be read.');
+            throw new RuntimeException(sprintf('The uploaded %s could not be read.', $label));
         }
 
         $supabaseUrl = rtrim($this->supabaseUrl, '/');
@@ -51,13 +67,14 @@ final class UploadService
                     'x-upsert' => 'false',
                 ],
                 'body' => fopen($localPath, 'rb'),
+                'timeout' => 300,
             ]);
         } catch (\Throwable $exception) {
-            throw new RuntimeException('The uploaded picture could not be sent to Supabase Storage.', previous: $exception);
+            throw new RuntimeException(sprintf('The uploaded %s could not be sent to Supabase Storage.', $label), previous: $exception);
         }
 
         if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED], true)) {
-            throw new RuntimeException('Supabase Storage rejected the uploaded picture.');
+            throw new RuntimeException(sprintf('Supabase Storage rejected the uploaded %s.', $label));
         }
 
         return $supabaseUrl

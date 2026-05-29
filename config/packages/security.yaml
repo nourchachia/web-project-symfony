@@ -42,6 +42,14 @@ security:
         - { path: ^/api/shows/ensure, roles: ROLE_ADMIN }
         - { path: ^/api/shows/.+/seats, roles: ROLE_ADMIN }
         - { path: ^/api/tickets, roles: ROLE_ADMIN }
+        - { path: ^/api/workshops$, methods: [GET], roles: ROLE_USER }
+        - { path: ^/api/workshops/.+$, methods: [GET], roles: ROLE_USER }
+        - { path: ^/api/workshops, roles: ROLE_ADMIN }
+        - { path: ^/api/workshop-registrations$, methods: [GET], roles: ROLE_ADMIN }
+        - { path: ^/api/workshop-registrations$, methods: [POST], roles: ROLE_USER }
+        - { path: ^/api/upload/video$, roles: ROLE_ADMIN }
+        - { path: ^/workshop-registrations, roles: ROLE_ADMIN }
+        - { path: ^/change-workshop, roles: ROLE_ADMIN }
         - { path: ^/booking, roles: ROLE_ADMIN }
         - { path: ^/workshops, roles: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }

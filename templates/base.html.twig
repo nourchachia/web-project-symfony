@@ -32,7 +32,7 @@
         {% elseif is_granted('ROLE_ADMIN') %}
             <li><a href="{{ path('app_home_index') }}#home">Home</a></li>
             <li><a href="{{ path('app_workshop_index') }}">Workshops</a></li>
-            <li><a href="{{ path('app_workshop_index') }}">Workshop Management</a></li>
+            <li><a href="{{ path('app_workshop_registrations_index') }}">Workshop Management</a></li>
             <li><a href="{{ path('app_booking_index') }}">Booking</a></li>
             <li><a href="{{ path('members_list') }}">Members</a></li>
             <li><a href="{{ path('app_approvals') }}">Approvals</a></li>
