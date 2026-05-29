@@ -1,32 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="{% block meta_description %}Theatro INSAT, the official theatre club of INSAT.{% endblock %}">
-        <title>{% block title %}Theatro INSAT{% endblock %}</title>
-        <link rel="icon" href="{{ asset('legacy/assets/theatro-logo.png') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Marcellus&family=Montserrat:wght@300;400;500&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap">
-        <link rel="stylesheet" href="{{ asset('legacy/css/site.css') }}">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Theatro INSAT{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('legacy/css/styles_base.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-        <script src="{{ asset('legacy/js/home.js') }}" defer></script>
-    </head>
-    <body class="{% block body_class %}{% endblock %}">
-        {% block navbar %}
-           {{ include('partials/_navbar.html.twig') }}
-        {% endblock %}
-        {{ include('partials/_flash.html.twig') }}
+<div id="star-container"></div>
 
-        <main>
-            {% block body %}{% endblock %}
-        </main>
+<nav class="navbar">
+    <div class="logo">
+        <img src="{{ asset('legacy/assets/logo.png') }}" alt="Theatro INSAT">
+    </div>
+    <ul class="nav-links">
 
-        {{ include('partials/_footer.html.twig') }}
-    </body>
+        {# ── Visiteur non connecté ── #}
+        {% if not app.user %}
+            <li><a href="{{ path('app_home_index') }}#home">Home</a></li>
+            <li><a href="{{ path('app_home_index') }}#about">About</a></li>
+            <li><a href="{{ path('app_home_index') }}#upcoming-shows">Shows</a></li>
+            <li><a href="{{ path('app_registration_new') }}">Join Us</a></li>
+            <li><a href="{{ path('app_contact_index') }}">Contact</a></li>
+
+        {# ── Admin ── #}
+        {% elseif is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('app_home_index') }}#home">Home</a></li>
+            <li><a href="{{ path('app_workshop_index') }}">Workshops</a></li>
+            <li><a href="{{ path('app_workshop_index') }}">Workshop Management</a></li>
+            <li><a href="{{ path('app_booking_index') }}">Booking</a></li>
+            <li><a href="{{ path('members_list') }}">Members</a></li>
+            <li><a href="{{ path('app_approvals') }}">Approvals</a></li>
+
+        {# ── User connecté ── #}
+        {% else %}
+            <li><a href="{{ path('app_home_index') }}#home">Home</a></li>
+            <li><a href="{{ path('app_home_index') }}#about">About</a></li>
+            <li><a href="{{ path('app_home_index') }}#upcoming-shows">Shows</a></li>
+            <li><a href="{{ path('app_workshop_index') }}">Workshops</a></li>
+        {% endif %}
+
+    </ul>
+    <div class="nav-auth-wrapper">
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}" class="nav-logout-btn">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="nav-login-btn">Login</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% block body %}{% endblock %}
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="{{ asset('legacy/assets/logo.png') }}" alt="Theatro INSAT Logo">
+            <h3>Theatro INSAT</h3>
+        </div>
+        <div class="footer-info">
+            <span class="info-label">INFORMATION</span>
+            <div class="footer-details">
+                <div class="footer-detail-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>theatro@insat.ucar.tn</span>
+                </div>
+                <div class="footer-detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>676 INSAT, Centre Urbain Nord BP, Tunis Cedex 1080, Tunisia</span>
+                </div>
+                <div class="footer-detail-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+216 27 423 156</span>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/theatro.insat" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/TheatroINSAT" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Theatro INSAT. All Rights Reserved.</p>
+    </div>
+</footer>
+
+{% block javascripts %}{% endblock %}
+</body>
 </html>

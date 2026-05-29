@@ -9,11 +9,13 @@
 {% block body_class %}page-auth page-registration{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('legacy/css/auth.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div id="star-container"></div>
+    
 
     <section class="auth-page">
         <div class="auth-container auth-container--wide">

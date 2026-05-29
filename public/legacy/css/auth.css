@@ -1,62 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Marcellus&family=Montserrat:wght@300;400;500&display=swap");
-
-#star-container {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: #0a0a0a;
-}
-
-#star-container::before,
-#star-container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    box-shadow:
-        347px 223px rgba(255, 255, 255, 0.8),
-        1703px 854px rgba(255, 255, 255, 0.5),
-        1269px 420px rgba(255, 255, 255, 0.9),
-        521px 391px rgba(255, 255, 255, 0.4),
-        1580px 643px rgba(255, 255, 255, 0.7),
-        934px 205px rgba(255, 255, 255, 0.6),
-        1156px 729px rgba(255, 255, 255, 0.3),
-        723px 687px rgba(255, 255, 255, 0.8),
-        1892px 445px rgba(255, 255, 255, 0.5),
-        456px 134px rgba(255, 255, 255, 0.9);
-    animation: auth-stars 60s linear infinite, auth-twinkle 3s ease-in-out infinite;
-}
-
-#star-container::after {
-    width: 2px;
-    height: 2px;
-    animation-duration: 80s, 4s;
-}
-
-@keyframes auth-stars {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-2000px);
-    }
-}
-
-@keyframes auth-twinkle {
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.3;
-    }
-}
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;400&family=Marcellus&family=Montserrat:wght@300;400;500&display=swap");
 
 .page-auth {
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
@@ -89,7 +31,7 @@
     color: white;
     font-family: "Cinzel Decorative", Georgia, serif;
     font-size: 78px;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 0;
     line-height: 1;
 }
