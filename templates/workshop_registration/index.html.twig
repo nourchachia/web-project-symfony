@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workshop Registrations - Theatro INSAT{% endblock %}
+
+{% block meta_description %}
+    View and manage workshop registrations for Theatro INSAT.
+{% endblock %}
+
+{% block body_class %}page-workshop-registrations{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('legacy/css/workshop_registrations.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('legacy/js/workshop_registrations.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <main class="admin-main" data-registrations-url="{{ path('api_workshop_registrations_list') }}">
+        <header class="page-header">
+            <p class="page-label">Theatro INSAT</p>
+            <h1 class="page-title">Workshop Registrations</h1>
+            <p class="page-subtitle">Manage and review all member sign-ups</p>
+        </header>
+
+        <section class="stats-row" aria-label="Workshop registration stats">
+            <article class="stat-card">
+                <span class="stat-icon" aria-hidden="true">#</span>
+                <div class="stat-body">
+                    <span class="stat-value" id="stat-total-val">-</span>
+                    <span class="stat-label">Total Registrations</span>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon" aria-hidden="true">*</span>
+                <div class="stat-body">
+                    <span class="stat-value" id="stat-rating-val">-</span>
+                    <span class="stat-label">Avg. Commitment</span>
+                </div>
+            </article>
+        </section>
+
+        <section class="controls-bar" aria-label="Table controls">
+            <label class="search-wrapper" for="search-input">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="search" id="search-input" class="search-input" placeholder="Search by name, ID, workshop...">
+            </label>
+
+            <select id="sort-select" class="sort-select" aria-label="Sort registrations">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="rating-desc">Rating High to Low</option>
+                <option value="rating-asc">Rating Low to High</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="workshop-asc">Workshop A-Z</option>
+            </select>
+
+            <button class="export-btn" id="export-btn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export CSV
+            </button>
+        </section>
+
+        <section class="table-section">
+            <div class="loading-state" id="loading-state">
+                <div class="spinner"></div>
+                <p>Loading registrations...</p>
+            </div>
+
+            <div class="error-state hidden" id="error-state">
+                <span class="error-icon" aria-hidden="true">!</span>
+                <p id="error-message">Could not load registrations.</p>
+                <button class="retry-btn" id="retry-btn" type="button">Retry</button>
+            </div>
+
+            <div class="empty-state hidden" id="empty-state">
+                <span class="empty-icon" aria-hidden="true">*</span>
+                <p>No registrations found.</p>
+            </div>
+
+            <div class="table-wrapper hidden" id="table-wrapper">
+                <table class="registrations-table" id="registrations-table">
+                    <thead>
+                        <tr>
+                            <th class="col-id">#</th>
+                            <th class="sortable" data-sort="workshop" scope="col">Workshop <span class="sort-arrow">&harr;</span></th>
+                            <th class="sortable" data-sort="name" scope="col">Name <span class="sort-arrow">&harr;</span></th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Member ID</th>
+                            <th class="sortable" data-sort="rating" scope="col">Commitment <span class="sort-arrow">&harr;</span></th>
+                            <th class="sortable" data-sort="createdAt" scope="col">Date <span class="sort-arrow">&harr;</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <div class="table-footer hidden" id="table-footer">
+                <span id="result-count" class="result-count"></span>
+            </div>
+
+            <div class="page-actions">
+                <a class="btn btn-primary" href="{{ path('app_workshop_manage') }}">Edit Workshops</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}
