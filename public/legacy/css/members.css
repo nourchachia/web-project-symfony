@@ -1,0 +1,173 @@
+body {
+    padding-top: 80px; /*navbar position teha fixed donc bech nra les boutons csv w kol lezem naamel padding wala margin >= height ta navbar*/
+    font-family: Lora, serif;
+}
+
+#main-title
+{
+    font-family: 'Cinzel Decorative', cursive;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 400;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    color: #D4AF37;
+}
+
+/**/
+#filter-add {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#filter-section
+{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+}
+
+#filter-section > *
+{
+    box-sizing: border-box; /* le padding est INCLUS dans le height */
+    /*tous les enfants directs mta div hedhi*/
+    border-color: white;
+    background-color: #111111;
+    height: 35px;
+    border-radius: 10px;
+    padding: 8px;
+    color: white;
+    font-family: Lora, serif;
+    font-size: 14px;
+}
+
+#filter-button
+{
+    width: 70px;
+}
+
+#add-button
+{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#add-button, select[name="filter-column"], #filter-button {
+    transition: opacity 0.3s;
+}
+
+a:hover, select[name="filter-column"]:hover, #filter-button:hover, .delete-btn:hover {
+    opacity: 0.7;
+}
+
+/**/
+.dataTables_wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#members-list {
+    border: 1px solid #3a3a3a;
+    border-collapse: collapse;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+#members-list th, #members-list td {
+    border: 1px solid #3a3a3a;
+    text-align: center;
+}
+
+td a {
+    font-size: 22px;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.delete-btn {
+    font-size: 22px;
+    transition: opacity 0.3s;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dt-buttons {
+    margin-bottom: 20px;
+}
+
+.dt-buttons .dt-button {
+    transition: opacity 0.3s;
+    opacity: 1;
+    font-family: Lora, serif;
+    height: 35px;           
+    padding: 0 16px;          
+    font-size: 14px;    
+}
+
+.dt-buttons .dt-button:hover {
+    opacity: 0.6;
+}
+
+.member-img
+{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+/*SWEETALERT*/
+.swal2-popup {
+    background: rgba(14, 14, 14, 0.97) !important;
+    border: 1px solid rgba(192, 192, 192, 0.35) !important;
+    border-radius: 12px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7) !important;
+}
+
+.swal2-title {
+    color: rgba(220, 220, 220, 0.95) !important;
+    letter-spacing: 1px;
+}
+
+.swal2-html-container {
+    color: rgba(185, 185, 185, 0.95) !important;
+}
+
+.swal2-confirm {
+    background: rgba(180, 180, 180, 0.12) !important;
+    border: 1px solid rgba(192, 192, 192, 0.45) !important;
+    color: rgba(220, 220, 220, 0.95) !important;
+    border-radius: 6px !important;
+}
+
+.swal2-confirm:hover {
+    background: rgba(200, 200, 200, 0.22) !important;
+}
+
+.swal2-cancel {
+    border-radius: 6px !important;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+

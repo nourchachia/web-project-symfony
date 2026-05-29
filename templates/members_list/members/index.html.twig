@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('legacy/css/members.css') }}">
+{% endblock %}
+
+{% block title %}Members List{% endblock %}
+
+{% block body %}
+<h1 id="main-title">Members List</h1>
+
+<div id="filter-add">
+    <form id="filter-section">
+        <select id="filter-column">
+            <option value="firstname">First Name</option>
+            <option value="lastname">Last Name</option>
+            <option value="department">Department</option>
+            <option value="fieldofstudy">Field Of Study</option>
+            <option value="yearofstudy">Year Of Study</option>
+        </select>
+        <input type="text" id="filter-value" placeholder="Value to search for...">
+        <button type="submit" id="filter-button">Filter</button>
+    </form>
+</div>
+
+<table id="members-list">
+    <thead>
+        <tr>
+            <th>IMAGE</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Field Of Study</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+</table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# DataTables #}
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('legacy/js/members.js') }}"></script>
+{% endblock %}
